@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "JackWFinlay.Jsonize": "1.0.1",
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
       "type": "platform"
