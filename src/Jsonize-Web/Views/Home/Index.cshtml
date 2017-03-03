@@ -33,7 +33,7 @@
         @using (Html.BeginForm("convert", "api", FormMethod.Get, new { }))
         {   
             @Html.TextBoxFor(m => m.url, new { @class = "search", id = "search-box"})
-            <a id="submit" value="Go!" class="button">Go!</a>
+            <a id="submit" href="#" class="button">Go!</a>
             @Html.ValidationMessageFor(m => m.url)
         }
 

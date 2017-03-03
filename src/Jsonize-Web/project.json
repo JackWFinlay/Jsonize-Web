@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "JackWFinlay.Jsonize": "1.0.2",
+    "JackWFinlay.Jsonize": "1.0.9",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.1",
