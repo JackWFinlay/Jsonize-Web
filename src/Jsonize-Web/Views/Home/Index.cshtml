@@ -37,26 +37,26 @@
             
             <a id="submit" class="button">Go!</a>
             @Html.ValidationMessageFor(m => m.Url)
-            <p>
-                Empty Text Node Handling:
+            <div>
+                <p class = "config-toggle">Empty Text Node Handling:</p>
                 @Html.RadioButton("emptyTextNodeHandling", "ignore", true, new { id = "emptyTextNodeHandlingIgnore" })@Html.Label("emptyTextNodeHandlingIgnore", "Ignore")
                 @Html.RadioButton("emptyTextNodeHandling", "include", false, new { id = "emptyTextNodeHandlingInclude" })@Html.Label("emptyTextNodeHandlingInclude", "Include")
-            </p>
-            <p>
-                Null Value Handling:
-                @Html.RadioButton("nullValueHandling", "include", true, new { id = "nullValueHandlingIgnore"})@Html.Label("nullValueHandlingIgnore", "Ignore")
+            </div>
+            <div>
+                <p class = "config-toggle">Null Value Handling:</p>
+                @Html.RadioButton("nullValueHandling", "include", true, new { id = "nullValueHandlingIgnore" })@Html.Label("nullValueHandlingIgnore", "Ignore")
                 @Html.RadioButton("nullValueHandling", "ignore", false, new { id = "nullValueHandlingInclude" })@Html.Label("nullValueHandlingInclude", "Include")
-            </p>
-            <p>
-                Text Trim Handling:
+            </div>
+            <div>
+                <p class = "config-toggle">Text Trim Handling:</p>
                 @Html.RadioButton("textTrimHandling", "trim", true, new { id = "textTrimHandlingTrim" })@Html.Label("textTrimHandlingTrim", "Trim")
                 @Html.RadioButton("textTrimHandling", "include", false, new { id = "textTrimHandlingInclude" })@Html.Label("textTrimHandlingInclude", "Include")
-            </p>
-            <p>
-                Class Attribute Handling:
+            </div>
+            <div>
+                <p class ="config-toggle">Attribute Handling:</p>
                 @Html.RadioButton("classAttributeHandling", "array", true, new { id = "classAttributeHandlingArray" })@Html.Label("classAttributeHandlingArray", "Array")
                 @Html.RadioButton("classAttributeHandling", "string", false, new { id = "classAttributeHandlingString" })@Html.Label("classAttributeHandlingString", "String")
-            </p>
+            </div>
         }
 
         @Html.TextArea("result", new { @class = "search text-area", disabled = "disabled"})

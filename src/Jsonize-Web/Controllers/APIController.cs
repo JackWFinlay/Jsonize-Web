@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using JackWFinlay.Jsonize;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NullValueHandling = JackWFinlay.Jsonize.NullValueHandling;
 
@@ -27,19 +28,32 @@ namespace Jsonize_Web.Controllers
                 ClassAttributeHandling = classAttributeHandling.ToLower().Equals("array") ? ClassAttributeHandling.Array : ClassAttributeHandling.String
             };
 
-
-            Jsonize jsonize = await Jsonize.FromHttpUrl(url);
-
-            if (format.ToLower().Equals("json"))
+            try
             {
-                JObject json = jsonize.ParseHtmlAsJson(jsonizeConfiguration);
-                return Json(json);
+                Jsonize jsonize = await Jsonize.FromHttpUrl(url);
+                if (format.ToLower().Equals("json"))
+                {
+                    JObject json = jsonize.ParseHtmlAsJson(jsonizeConfiguration);
+                    return Json(json);
+                }
+                else
+                {
+                    string jsonString = jsonize.ParseHtmlAsJsonString(jsonizeConfiguration);
+                    return jsonString;
+                }
             }
-            else
+            catch (Exception e)
             {
-                string jsonString = jsonize.ParseHtmlAsJsonString(jsonizeConfiguration);
-                return jsonString;
+                if (format.ToLower().Equals("json"))
+                {
+                    return JsonConvert.DeserializeObject<JObject>("{ 'error' : 'Incorrect usage.' }");
+                }
+                else
+                {
+                    return "{ 'error' : 'Incorrect usage.' }";
+                }
             }
+            
         }
     }
 }

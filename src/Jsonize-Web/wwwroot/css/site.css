@@ -47,6 +47,9 @@ p {
   font-family: 'Courier New';
   word-break: break-word; }
 
+.config-toggle {
+  display: inline-block; }
+
 .container {
   border-top: 1px solid #dbdbdb;
   color: #333; }
@@ -172,6 +175,8 @@ p {
 @media all and (max-width: 767px) {
   .about-inner {
     width: 90%; }
+  .config-toggle {
+    width: 100%; }
   .hamburger {
     padding-top: 15px; }
   .inner-nav {
