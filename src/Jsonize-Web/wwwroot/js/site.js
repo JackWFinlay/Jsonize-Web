@@ -14,7 +14,7 @@
 
         if ($(window).width() <= 1070) {
             $("#nav").animate({ height: "100px" }, 250, function () {
-                $('#menu > li:not(:first-child)').css("display", "none");
+                $("#menu > li:not(:first-child)").css("display", "none");
             });
 
 
@@ -35,8 +35,8 @@
     $("a.anchor").not(".button").click(function (event) {
         event.preventDefault();
 
-        $('html, body').animate({
-            scrollTop: $($.attr(this, 'href')).offset().top
+        $("html, body").animate({
+            scrollTop: $($.attr(this, "href")).offset().top
         }, 400, function () {
             closeMenu();
         }
@@ -67,16 +67,57 @@
 
     });
 
-    $('#search-box').bind('keypress keydown keyup', function (e) {
-        if (e.keyCode == 13) { e.preventDefault(); }
+    $("#search-box").bind("keypress keydown keyup", function (e) {
+        if (e.keyCode === 13) { e.preventDefault(); }
     });
 
-    $('#submit').click(function () {
+    $("#submit").click(function() {
+        submit();
+    });
+
+    function submit() {
+        var emptyTextNodeHandling = "ignore";
+        var nullValueHandling = "ignore";
+        var textTrimHandling = "trim";
+        var classAttributeHandling = "array";
+
+        if ($("#emptyTextNodeHandlingInclude").is(":checked")) {
+            emptyTextNodeHandling = "include";
+        } else if ($("#emptyTextNodeHandlingIgnore").is(":checked")) {
+            emptyTextNodeHandling = "ignore";
+        }
+
+        if ($("#nullValueHandlingInclude").is(":checked")) {
+            nullValueHandling = "include";
+        } else if ($("#emptyTextNodeHandlingIgnore").is(":checked")) {
+            nullValueHandling = "ignore";
+        }
+
+        if ($("#textTrimHandlingTrim").is(":checked")) {
+            textTrimHandling = "trim";
+        } else if ($("#emptyTextNodeHandlingInclude").is(":checked")) {
+            textTrimHandling = "include";
+        }
+
+        if ($("#classAttributeHandlingArray").is(":checked")) {
+            classAttributeHandling = "array";
+        } else if ($("#classAttributeHandlingString").is(":checked")) {
+            classAttributeHandling = "string";
+        }
+        
         if (/^(http|https):\/\//.test($("#search-box").val())) {
-            $.get("/api/convertstring", { url: $("#search-box").val() })
+            $.get("/api/convert",
+                {
+                    url: $("#search-box").val(),
+                    format: "string",
+                    emptyTextNodeHandling: emptyTextNodeHandling,
+                    nullValueHandling: nullValueHandling,
+                    textTrimHandling: textTrimHandling,
+                    classAttributeHandling: classAttributeHandling
+                })
             .done(function (data) {
                 $("#result").text(data);
             });
         }
-    });
+    };
 });

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Jsonize";
 }
-@model Jsonize_Web.Models.APIModel
+@model Jsonize_Web.Models.ApiModel
 
 <div id="top" class=""></div>
 <!-- nav -->
@@ -29,15 +29,37 @@
         <h2>Convert HTML to JSON</h2>
 
         <div id="tryit" class="anchor-spacer"></div>
-        <p>Enter a URL of a page to convert to JSON. Requires <span class="code">http://</span> or <span class="code">https://</span></p>
+        <p>Enter a URL of a page to convert to JSON. Requires <span class="code">http://</span> or <span class="code">https://</span> prefix.</p>
         @using (Html.BeginForm("convert", "api", FormMethod.Get, new { }))
         {   
-            @Html.TextBoxFor(m => m.url, new { @class = "search", id = "search-box"})
-            <a id="submit" href="#" class="button">Go!</a>
-            @Html.ValidationMessageFor(m => m.url)
+            @Html.HiddenFor(m => m.Format, new { id = "format", Value = "string"})
+            @Html.TextBoxFor(m => m.Url, new { @class = "search", id = "search-box"})
+            
+            <a id="submit" class="button">Go!</a>
+            @Html.ValidationMessageFor(m => m.Url)
+            <p>
+                Empty Text Node Handling:
+                @Html.RadioButton("emptyTextNodeHandling", "ignore", true, new { id = "emptyTextNodeHandlingIgnore" })@Html.Label("emptyTextNodeHandlingIgnore", "Ignore")
+                @Html.RadioButton("emptyTextNodeHandling", "include", false, new { id = "emptyTextNodeHandlingInclude" })@Html.Label("emptyTextNodeHandlingInclude", "Include")
+            </p>
+            <p>
+                Null Value Handling:
+                @Html.RadioButton("nullValueHandling", "include", true, new { id = "nullValueHandlingIgnore"})@Html.Label("nullValueHandlingIgnore", "Ignore")
+                @Html.RadioButton("nullValueHandling", "ignore", false, new { id = "nullValueHandlingInclude" })@Html.Label("nullValueHandlingInclude", "Include")
+            </p>
+            <p>
+                Text Trim Handling:
+                @Html.RadioButton("textTrimHandling", "trim", true, new { id = "textTrimHandlingTrim" })@Html.Label("textTrimHandlingTrim", "Trim")
+                @Html.RadioButton("textTrimHandling", "include", false, new { id = "textTrimHandlingInclude" })@Html.Label("textTrimHandlingInclude", "Include")
+            </p>
+            <p>
+                Class Attribute Handling:
+                @Html.RadioButton("classAttributeHandling", "array", true, new { id = "classAttributeHandlingArray" })@Html.Label("classAttributeHandlingArray", "Array")
+                @Html.RadioButton("classAttributeHandling", "string", false, new { id = "classAttributeHandlingString" })@Html.Label("classAttributeHandlingString", "String")
+            </p>
         }
 
-        @Html.TextArea("result", new { @class = "search text-area"})
+        @Html.TextArea("result", new { @class = "search text-area", disabled = "disabled"})
 
 
         <br />
@@ -45,9 +67,16 @@
         <h1>Usage</h1>
         <p>To use the Jsonize API, use the endpoint 
             <span class="code">http://jsonize.co/api/convert</span>, 
-            use the id <span class="code">url</span> for the query string. 
+            use the id <span class="code">url</span> for the query url. The following are settings available to the consumer(defaults in bold):
+            <ul>
+                <li><span class="code">format</span>: <span class="code"><strong>json</strong></span> or <span class="code">string</span></li>
+                <li><span class = "code">emptyTextNodeHandling</span>: <span class="code"><strong>include</strong></span> or <span class ="code">ignore</span></li>
+                <li><span class = "code">nullValueHandling</span>: <span class="code"><strong>include</strong></span> or <span class="code">ignore</span></li>
+                <li><span class = "code">textTrimHandling </span>: <span class="code"><strong>trim</strong></span> or <span class="code">include</span></li>
+                <li><span class = "code">classAttributeHandling</span>: <span class="code"><strong>array</strong></span> or <span class="code">string</span></li>
+            </ul>
         </p>
-        <p>E.g. <span class="code">http://jsonize.co/api/convert?url=http%3A%2F%2Fjsonize.co</span></p>
+        <p>E.g. <span class="code">http://jsonize.co/api/convert?url=http%3A%2F%2Fjsonize.co&format=json&emptyTextNodeHandling=ignore&nullValueHandling=ignore&textTrimHandling=trim&classAttributeHandling=array</span></p>
 
         <br />
         <div id="project" class="anchor-spacer"></div>
