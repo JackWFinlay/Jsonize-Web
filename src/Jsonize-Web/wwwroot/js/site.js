@@ -117,6 +117,8 @@
                 })
             .done(function (data) {
                 $("#result").text(data);
+            }).fail(function (data) {
+                $("#result").text("Incorrect usage.");
             });
         }
     };

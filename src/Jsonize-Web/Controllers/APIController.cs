@@ -39,7 +39,6 @@ namespace Jsonize_Web.Controllers
             {
                 string jsonString = jsonize.ParseHtmlAsJsonString(jsonizeConfiguration);
                 return jsonString;
-
             }
         }
     }
