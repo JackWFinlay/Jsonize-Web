@@ -31,5 +31,10 @@ namespace Jsonize_Web.Controllers
         {
             return View();
         }
+
+        public IActionResult jsrendertest()
+        {
+            return View();
+        }
     }
 }

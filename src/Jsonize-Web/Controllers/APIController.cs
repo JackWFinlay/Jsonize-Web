@@ -18,7 +18,8 @@ namespace Jsonize_Web.Controllers
                                             string emptyTextNodeHandling = "ignore",
                                             string nullValueHandling = "ignore", 
                                             string textTrimHandling = "trim",
-                                            string classAttributeHandling = "array")
+                                            string classAttributeHandling = "array",
+                                            string renderJavascript = "false")
         {
             JsonizeConfiguration jsonizeConfiguration = new JsonizeConfiguration()
             {
@@ -30,7 +31,23 @@ namespace Jsonize_Web.Controllers
 
             try
             {
-                Jsonize jsonize = await Jsonize.FromHttpUrl(url);
+                Jsonize jsonize;
+                if (renderJavascript.ToLower().Equals("true"))
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.DefaultRequestHeaders.Add("url", url);
+                        var response = await client.GetAsync(Environment.GetEnvironmentVariable("DepthchargeRenderUrl"));
+                        var html = await response.Content.ReadAsStringAsync();
+                        jsonize = Jsonize.FromHtmlString(html);
+                    }
+                    
+                }
+                else
+                {
+                    jsonize = await Jsonize.FromHttpUrl(url);
+                }
+
                 if (format.ToLower().Equals("json"))
                 {
                     JObject json = jsonize.ParseHtmlAsJson(jsonizeConfiguration);

@@ -57,6 +57,11 @@
                 @Html.RadioButton("classAttributeHandling", "array", true, new { id = "classAttributeHandlingArray" })@Html.Label("classAttributeHandlingArray", "Array")
                 @Html.RadioButton("classAttributeHandling", "string", false, new { id = "classAttributeHandlingString" })@Html.Label("classAttributeHandlingString", "String")
             </div>
+            <div>
+                <p class="config-toggle">Render Javascript:</p>
+                @Html.RadioButton("renderJavascript", "false", true, new { id = "renderJavascriptFalse" })@Html.Label("renderJavascriptFalse", "False")
+                @Html.RadioButton("renderJavascript", "true", false, new { id = "renderJavascriptTrue" })@Html.Label("renderJavascriptTrue", "True")
+            </div>
         }
 
         @Html.TextArea("result", new { @class = "search text-area", disabled = "disabled"})
@@ -69,14 +74,15 @@
             <span class="code">http://jsonize.co/api/convert</span>, 
             use the id <span class="code">url</span> for the query url. The following are settings available to the consumer(defaults in bold):
             <ul>
-                <li><span class="code">format</span>: <span class="code"><strong>json</strong></span> or <span class="code">string</span></li>
+                <li><span class = "code">format</span>: <span class="code"><strong>json</strong></span> or <span class="code">string</span></li>
                 <li><span class = "code">emptyTextNodeHandling</span>: <span class="code"><strong>include</strong></span> or <span class ="code">ignore</span></li>
                 <li><span class = "code">nullValueHandling</span>: <span class="code"><strong>include</strong></span> or <span class="code">ignore</span></li>
                 <li><span class = "code">textTrimHandling </span>: <span class="code"><strong>trim</strong></span> or <span class="code">include</span></li>
                 <li><span class = "code">classAttributeHandling</span>: <span class="code"><strong>array</strong></span> or <span class="code">string</span></li>
+                <li><span class = "code">renderJavascript</span>: <span class="code"><strong>false</strong></span> or <span class="code">true</span></li>
             </ul>
         </p>
-        <p>E.g. <span class="code">http://jsonize.co/api/convert?url=http%3A%2F%2Fjsonize.co&format=json&emptyTextNodeHandling=ignore&nullValueHandling=ignore&textTrimHandling=trim&classAttributeHandling=array</span></p>
+        <p>E.g. <span class="code">http://jsonize.co/api/convert?url=http%3A%2F%2Fjsonize.co&format=json&emptyTextNodeHandling=ignore&nullValueHandling=ignore&textTrimHandling=trim&classAttributeHandling=array&renderJavascript=true</span></p>
 
         <br />
         <div id="project" class="anchor-spacer"></div>

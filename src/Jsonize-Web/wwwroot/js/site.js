@@ -80,6 +80,7 @@
         var nullValueHandling = "ignore";
         var textTrimHandling = "trim";
         var classAttributeHandling = "array";
+        var renderJavascript = "false";
 
         if ($("#emptyTextNodeHandlingInclude").is(":checked")) {
             emptyTextNodeHandling = "include";
@@ -104,6 +105,12 @@
         } else if ($("#classAttributeHandlingString").is(":checked")) {
             classAttributeHandling = "string";
         }
+
+        if ($("#renderJavascriptFalse").is(":checked")) {
+            renderJavascript = "false";
+        } else if ($("#renderJavascriptTrue").is(":checked")) {
+            renderJavascript = "true";
+        }
         
         if (/^(http|https):\/\//.test($("#search-box").val())) {
             $.get("/api/convert",
@@ -113,7 +120,8 @@
                     emptyTextNodeHandling: emptyTextNodeHandling,
                     nullValueHandling: nullValueHandling,
                     textTrimHandling: textTrimHandling,
-                    classAttributeHandling: classAttributeHandling
+                    classAttributeHandling: classAttributeHandling,
+                    renderJavascript: renderJavascript
                 })
             .done(function (data) {
                 $("#result").text(data);
