@@ -111,8 +111,14 @@
         } else if ($("#renderJavascriptTrue").is(":checked")) {
             renderJavascript = "true";
         }
-        
+
         if (/^(http|https):\/\//.test($("#search-box").val())) {
+            if (renderJavascript) {
+                $("#result").text("Loading...Please Wait...Rendering Javascript takes additional time...");
+            } else {
+                $("#result").text("Loading...Please Wait...");
+            }
+
             $.get("/api/convert",
                 {
                     url: $("#search-box").val(),
@@ -123,11 +129,14 @@
                     classAttributeHandling: classAttributeHandling,
                     renderJavascript: renderJavascript
                 })
-            .done(function (data) {
-                $("#result").text(data);
-            }).fail(function (data) {
-                $("#result").text("Incorrect usage.");
-            });
+                .done(function(data) {
+                    $("#result").text(data);
+                })
+                .fail(function(data) {
+                    $("#result").text("Incorrect usage.");
+                });
+        } else {
+            $("#result").text("Please include protocol (http:// or https://) in Url");
         }
     };
 });

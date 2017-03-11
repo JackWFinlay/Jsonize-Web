@@ -21,7 +21,7 @@
       "launchUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DepthchargeRenderUrl": "http://localhost:1663/api/render" 
+        "DepthchargeRenderUrl": "http://localhost:1663" 
       }
     }
   }

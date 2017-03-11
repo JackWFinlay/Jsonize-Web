@@ -37,7 +37,7 @@ namespace Jsonize_Web.Controllers
                     using (var client = new HttpClient())
                     {
                         client.DefaultRequestHeaders.Add("url", url);
-                        var response = await client.GetAsync(Environment.GetEnvironmentVariable("DepthchargeRenderUrl"));
+                        var response = await client.GetAsync((Environment.GetEnvironmentVariable("DepthchargeRenderUrl") ?? Environment.GetEnvironmentVariable("APPSETTING_DepthchargeRenderUrl")) + "/api/render");
                         var html = await response.Content.ReadAsStringAsync();
                         jsonize = Jsonize.FromHtmlString(html);
                     }
