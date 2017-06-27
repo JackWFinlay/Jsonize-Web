@@ -41,7 +41,7 @@ namespace Jsonize_Web.Controllers
                         var html = await response.Content.ReadAsStringAsync();
                         jsonize = Jsonize.FromHtmlString(html);
                     }
-                    
+
                 }
                 else
                 {
@@ -70,7 +70,6 @@ namespace Jsonize_Web.Controllers
                     return "{ 'error' : 'Incorrect usage.' }";
                 }
             }
-            
         }
     }
 }
